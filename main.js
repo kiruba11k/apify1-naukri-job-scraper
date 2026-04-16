@@ -35,31 +35,26 @@ try {
 
         console.log(`Filtering ${items.length} items to requested columns...`);
 
-        // 5. Transform and filter items with split-error protection
+        // 5. Transform and filter items with specific object path mapping
         const filteredItems = items.map((item) => {
-            // Safe extraction for Company Name
-            const rawDetail = String(item.companyDetail || ""); 
-            const extractedName = rawDetail.split('|')[0].replace(/["']/g, "").trim();
-
             return {
-                companyName: extractedName || item.companyName || "N/A",
+                // Pull companyName directly from companyDetail object
+                companyName: item.companyDetail?.name || item.staticCompanyName || "N/A",
                 applyCount: item.applicantsCount || "0",
                 roleCategory: item.roleCategory || "",
                 jobRole: item.jobRole || "",
                 companyDetail: item.companyDetail || "",
-                shortDescription: item.placeholders?.find(p => p.type === 'snippet')?.label || "",
                 functionalArea: item.functionalArea || "",
                 description: item.jobDescription || item.description || "",
                 staticCompanyName: item.companyName || "",
                 industry: item.industry || "",
-                staticUrl: item.staticUrl || "",
+                url: item.staticUrl || item.jdURL || item.applyUrl || "", // Renamed from staticUrl
                 title: item.title || "",
                 walkIn: item.walkIn || false,
                 maximumExperience: item.maximumExperience || "",
                 minimumExperience: item.minimumExperience || "",
                 locations: item.locations || item.location || "",
-                keySkills: item.tagsAndSkills || item.keySkills || "",
-                url: item.jdURL || item.applyUrl || ""
+                keySkills: item.tagsAndSkills || item.keySkills || ""
             };
         });
 
