@@ -1,0 +1,37 @@
+{
+    "title": "Naukri Job Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchQuery": {
+            "title": "Search Query",
+            "type": "string",
+            "description": "Keywords like 'Frontend Developer' or 'Data Scientist'",
+            "default": "developer"
+        },
+        "location": {
+            "title": "Location",
+            "type": "string",
+            "description": "City or Country",
+            "default": "india"
+        },
+        "maximumJobs": {
+            "title": "Maximum Jobs",
+            "type": "integer",
+            "description": "Number of jobs to scrape",
+            "default": 20
+        },
+        "platform": {
+            "title": "Platform",
+            "type": "string",
+            "enum": ["naukri", "naukrigulf"],
+            "default": "naukri"
+        },
+        "startUrls": {
+            "title": "Direct Search URLs (Optional)",
+            "type": "array",
+            "description": "Paste direct search result URLs from Naukri here.",
+            "editor": "stringList"
+        }
+    }
+}
