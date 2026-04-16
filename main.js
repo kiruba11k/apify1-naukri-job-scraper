@@ -19,10 +19,10 @@ const scraperInput = {
     }
 };
 
-console.log(`--- Starting Naukri Scraper for: ${scraperInput.searchQuery} ---`);
+console.log(`--- Starting Naukri Scraper: ${scraperInput.searchQuery} ---`);
 
 try {
-    // 3. Call the memo23/naukri-scraper
+    // 3. Call the underlying scraper
     const run = await Actor.call('memo23/naukri-scraper', scraperInput);
 
     if (run.status === 'SUCCEEDED') {
@@ -33,25 +33,23 @@ try {
             limit: 99999,
         });
 
-        console.log(`Filtering ${items.length} items...`);
+        console.log(`Filtering ${items.length} items to requested fields...`);
 
-        // 5. Filter for clean output (specific columns)
+        // 5. Filter and Map to your specific requested fields
         const filteredItems = items.map((item) => ({
-            jobId: item.jobId,
+            url: item.jdURL || item.applyUrl,
             title: item.title,
-            companyName: item.companyName,
-            location: item.location,
-            experience: item.experience,
-            salary: item.salary,
-            postedOn: item.postedOn,
+            staticCompanyName: item.companyName,
+            companyPageUrl: item.companyDetails?.url || null,
+            locations: item.locations || item.location,
+            createdDate: item.postedOn,
+            brandingTags: item.tagsAndSkills || [],
             description: item.jobDescription || item.description,
-            skills: item.tagsAndSkills || item.skills,
-            applyLink: item.applyUrl || item.jdURL,
-            platform: item.platform || scraperInput.platform,
-            companyWebsite: item.companyWebsite || null,
+            shortDescription: item.placeholders?.find(p => p.type === 'snippet')?.label || "",
+            applyCount: item.applicantsCount || "0",
         }));
 
-        // 6. Push to your dataset
+        // 6. Push the cleaned data to your dataset
         await Actor.pushData(filteredItems);
         
         console.log('--- Process Complete ---');
