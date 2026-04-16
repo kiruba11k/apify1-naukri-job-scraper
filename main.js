@@ -46,7 +46,6 @@ try {
                 companyDetail: item.companyDetail || "",
                 functionalArea: item.functionalArea || "",
                 description: item.jobDescription || item.description || "",
-                staticCompanyName: item.companyName || "",
                 industry: item.industry || "",
                 url: item.staticUrl || item.jdURL || item.applyUrl || "", // Renamed from staticUrl
                 title: item.title || "",
