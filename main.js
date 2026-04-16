@@ -40,7 +40,7 @@ try {
             return {
                 // Pull companyName directly from companyDetail object
                 companyName: item.companyDetail?.name || item.staticCompanyName || "N/A",
-                applyCount: item.applicantsCount || "0",
+                applyCount: item.applicantsCount || "",
                 roleCategory: item.roleCategory || "",
                 jobRole: item.jobRole || "",
                 companyDetail: item.companyDetail || "",
