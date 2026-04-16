@@ -7,23 +7,28 @@
             "title": "Search Query",
             "type": "string",
             "description": "Keywords like 'Frontend Developer' or 'Data Scientist'",
+            "editor": "textfield",
             "default": "developer"
         },
         "location": {
             "title": "Location",
             "type": "string",
             "description": "City or Country",
+            "editor": "textfield",
             "default": "india"
         },
         "maximumJobs": {
             "title": "Maximum Jobs",
             "type": "integer",
             "description": "Number of jobs to scrape",
+            "editor": "number",
             "default": 20
         },
         "platform": {
             "title": "Platform",
             "type": "string",
+            "description": "Select the target website",
+            "editor": "select",
             "enum": ["naukri", "naukrigulf"],
             "default": "naukri"
         },
