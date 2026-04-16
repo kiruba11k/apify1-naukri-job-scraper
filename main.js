@@ -40,7 +40,7 @@ try {
             return {
                 // Pull companyName directly from companyDetail object
                 companyName: item.companyDetail?.name || item.staticCompanyName || "N/A",
-                applyCount: item.applicantsCount || "",
+                applyCount: item.applyCount !== undefined ? item.applyCount : "0",
                 roleCategory: item.roleCategory || "",
                 jobRole: item.jobRole || "",
                 companyDetail: item.companyDetail || "",
@@ -54,7 +54,8 @@ try {
                 maximumExperience: item.maximumExperience || "",
                 minimumExperience: item.minimumExperience || "",
                 locations: item.locations || item.location || "",
-                keySkills: item.tagsAndSkills || item.keySkills || ""
+                keySkills: item.tagsAndSkills || item.keySkills || "",
+                shortDescription: item.shortDescription || "" 
             };
         });
 
