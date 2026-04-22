@@ -1,18 +1,15 @@
-# Naukri Job Scraper (Apify Actor Wrapper)
+# Naukri Job Scraper
 
-This project is an Apify Actor that calls the public actor **`memo23/naukri-scraper`**, then normalizes the output into a cleaner and consistent dataset format.
-
-It is designed for Apify usage: you provide search input (keyword, location, max jobs, etc.), the actor runs the underlying scraper, and pushes filtered job records to the dataset.
+It is designed for scrapping Naukri job you provide search input (keyword, location, max jobs, etc.), the actor runs the underlying scraper, and pushes filtered job records to the dataset.
 
 ## What this actor does
 
 1. Initializes the Apify Actor runtime.
 2. Reads input from `Actor.getInput()`.
 3. Builds scraper input with defaults.
-4. Calls `memo23/naukri-scraper`.
-5. Reads the run dataset items.
-6. Maps each item to a compact output schema.
-7. Pushes normalized results to this actor's dataset.
+4. Reads the run dataset items.
+5. Maps each item to a compact output schema.
+6. Pushes normalized results to this actor's dataset.
 
 ## Project structure
 
@@ -86,32 +83,6 @@ Each output item is normalized to the fields below:
 - `locations` is taken from `item.locations` or fallback `item.location`.
 - `keySkills` is taken from `item.tagsAndSkills` or fallback `item.keySkills`.
 
-## How to run
-
-### On Apify
-
-1. Create/import this actor on Apify.
-2. Set your actor input JSON.
-3. Run the actor.
-4. Open the run dataset to get normalized job records.
-
-### Locally
-
-```bash
-npm install
-npm start
-```
-
-> Note: local execution still requires proper Apify environment configuration and access to call the external actor `memo23/naukri-scraper`.
-
-## Docker
-
-The Docker image:
-
-- uses `apify/actor-node:20`,
-- installs production dependencies,
-- copies project files,
-- starts with `npm start`.
 
 ## Error handling behavior
 
@@ -120,7 +91,6 @@ The Docker image:
 
 ## Important limitations
 
-- This actor is a **wrapper** around `memo23/naukri-scraper`; scraping quality/coverage depends on that actor.
 - Output fields are transformed and may omit source fields not included in the mapping.
 - Current fetch limit for reading items from the source dataset is `99999`.
 
